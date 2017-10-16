@@ -63,7 +63,7 @@ func main() {
 	var arch string
 	flag.StringVar(&in, "i", "", "input file")
 	flag.StringVar(&ofile, "o", "", "output file")
-	flag.StringVar(&otype, "t", "", "output type (dockerfile/srcmk/mk)")
+	flag.StringVar(&otype, "t", "", "output type (dockerfile/srcmk/mk/pkglist)")
 	flag.StringVar(&arch, "arch", "x86_64", "arch specification")
 	flag.Parse()
 	indat, err := ioutil.ReadFile(in)
@@ -272,5 +272,16 @@ func main() {
 		if err != nil {
 			panic(err)
 		}
+	case "pkglist":
+		pklist := []string{}
+		for n := range pkgen.Packages {
+			pklist = append(pklist, n)
+		}
+		_, err = fmt.Fprint(outf, strings.Join(pklist, "\n"))
+		if err != nil {
+			panic(err)
+		}
+	default:
+		panic(fmt.Errorf("Unrecognized type %s", otype))
 	}
 }
