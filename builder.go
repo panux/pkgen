@@ -119,9 +119,10 @@ func main() {
 				n = strings.TrimSuffix(n, ".git")
 				if ch := u.Query().Get("checkout"); ch != "" {
 					u.RawQuery = ""
-					_, err = fmt.Fprintf(outf, "%s:\n\tgit clone %s %s\n\tgit checkout %s\n",
+					_, err = fmt.Fprintf(outf, "%s:\n\tgit clone %s %s\n\tgit -C %s checkout %s\n",
 						n,
 						u.String(),
+						n,
 						n,
 						ch,
 					)
