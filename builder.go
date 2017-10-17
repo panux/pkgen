@@ -104,7 +104,7 @@ func main() {
 			if err != nil {
 				panic(err)
 			}
-			_, n := filepath.Split(u.Path)
+			n := filepath.Base(u.Path)
 			switch u.Scheme {
 			case "https":
 				_, err = fmt.Fprintf(outf, "%s:\n\twget %s -O %s\n",
@@ -136,7 +136,7 @@ func main() {
 					panic(err)
 				}
 			case "file":
-				p, err := filepath.Abs(u.Path)
+				p, err := filepath.Abs(filepath.Join(".", u.Path))
 				if err != nil {
 					panic(err)
 				}
