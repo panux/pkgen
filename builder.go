@@ -117,6 +117,11 @@ func main() {
 				}
 			case "git":
 				n = strings.TrimSuffix(n, ".git")
+				proto := "https"
+				if pr := u.Query().Get("proto"); pr != "" {
+					proto = pr
+				}
+				u.Scheme = proto
 				if ch := u.Query().Get("checkout"); ch != "" {
 					u.RawQuery = ""
 					_, err = fmt.Fprintf(outf, "%s:\n\tgit clone %s %s\n\tgit -C %s checkout %s\n",
@@ -127,6 +132,7 @@ func main() {
 						ch,
 					)
 				} else {
+					u.RawQuery = ""
 					_, err = fmt.Fprintf(outf, "%s:\n\tgit clone %s %s\n",
 						n,
 						u.String(),
