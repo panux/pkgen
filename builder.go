@@ -199,7 +199,7 @@ func main() {
 		pkis := []string{}
 		tars := []string{}
 		for n := range pkgen.Packages {
-			_, err = fmt.Fprintf(outf, "out/%s: out\n\tmkdir out/%s\nexport _%s_pkginfo\nout/%s/.pkginfo: out/%s\n\techo \"$$_%s_pkginfo\" > out/%s/.pkginfo\ntars/%s.tar.gz: tars script\n\ttar -cf tars/%s.tar.gz -C out/%s .\n\n", n, n, n, n, n, n, n, n, n, n)
+			_, err = fmt.Fprintf(outf, "out/%s: out\n\tmkdir out/%s\nexport _%s_pkginfo\nout/%s/.pkginfo: out/%s\n\techo \"$$_%s_pkginfo\" > out/%s/.pkginfo\ntars/%s.tar.gz: tars script\n\ttar -cf tars/%s.tar.gz -C out/%s .\n\n", n, n, strings.Replace(n, "-", "_", -1), n, n, strings.Replace(n, "-", "_", -1), n, n, n, n)
 			if err != nil {
 				panic(err)
 			}
