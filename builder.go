@@ -262,7 +262,11 @@ func main() {
 								return fmt.Sprintf("(cd %s && ./configure %s)", dir, strings.Join(ca, " "))
 							},
 							"confarch": func() string {
-								return "$(shell uname -m)"
+								if arch == "x86" {
+									return "i686"
+								} else {
+									return arch
+								}
 							},
 						},
 						pkgen,
