@@ -70,7 +70,7 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-	outf, err := os.OpenFile(ofile, os.O_CREATE|os.O_WRONLY, 0700)
+	outf, err := os.OpenFile(ofile, os.O_CREATE|os.O_WRONLY|os.O_TRUNC, 0700)
 	if err != nil {
 		panic(err)
 	}
